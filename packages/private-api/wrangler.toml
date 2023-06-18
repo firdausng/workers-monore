@@ -1,0 +1,51 @@
+name = "private-api"
+main = "src/worker.ts"
+compatibility_date = "2023-05-31"
+
+kv_namespaces = [
+    { binding = "KV_FROM_FIRDAUS", preview_id = "86fa25a783b2474cb2df090497ad0dc6" , id = "0e0cee0606dd4334aeddbe0fd0a27011" }
+]
+
+[build]
+command = "npm run build"
+
+[build.upload]
+format = "modules"
+#dir = "dist"
+#main = "worker.mjs"
+
+[miniflare]
+route = "http://test.private.local/*"
+kv_persist = true
+port = 8002
+
+[vars]
+API_TOKEN = "example_dev_token"
+STRIPE_TOKEN = "pk_xyz1234_test"
+
+[env.dev]
+name = "private-api-dev"
+route = "private-api-dev.decflare.com/*"
+
+kv_namespaces = [
+    { binding = "KV_FROM_FIRDAUS", id = "0e0cee0606dd4334aeddbe0fd0a27011" }
+]
+
+[env.dev.vars]
+API_TOKEN = "example_dev_token"
+STRIPE_TOKEN = "pk_xyz1234_test"
+ENVIRONMENT="dev"
+
+[env.staging]
+name = "private-api-staging"
+route = "private-api-staging.decflare.com/*"
+
+kv_namespaces = [
+    { binding = "KV_FROM_FIRDAUS", id = "0e0cee0606dd4334aeddbe0fd0a27011" }
+]
+
+[env.staging.vars]
+API_TOKEN = "example_dev_token"
+STRIPE_TOKEN = "pk_xyz1234_test"
+ENVIRONMENT="staging"
+

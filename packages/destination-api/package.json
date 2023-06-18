@@ -1,0 +1,18 @@
+{
+  "name": "destination-api",
+  "version": "0.0.1",
+  "private": true,
+  "module": "dist/worker.mjs",
+  "type": "module",
+  "scripts": {
+    "pretest": "npm run build",
+    "test": "jest",
+    "build": "rollup -c",
+    "deploy": "wrangler publish",
+    "start": "wrangler dev",
+    "dev": "miniflare dist/worker.mjs --watch --debug"
+  },
+  "dependencies": {
+    "private-api-worker": "*"
+  }
+}

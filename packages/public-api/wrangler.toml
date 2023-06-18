@@ -1,0 +1,45 @@
+name = "public-api"
+main = "src/worker.ts"
+compatibility_date = "2023-05-31"
+
+services = [
+    { binding = "DESTINATION_API", service = "destination-api" },
+]
+
+[vars]
+TEST_KEY="abc"
+
+[build]
+command = "npm run build"
+
+[build.upload]
+format = "modules"
+#dir = "dist"
+#main = "worker.mjs"
+
+[miniflare]
+route = "http://test.public.local/*"
+port = 8003
+
+[miniflare.mounts]
+destination-api = "../destination-api"
+private-api = "../private-api"
+
+[env.dev]
+name = "public-api-dev"
+
+routes = [
+    { pattern = "public-api-dev.decflare.com", custom_domain = true }
+]
+
+services = [
+    { binding = "DESTINATION_API", service = "destination-api-dev" },
+]
+
+[env.staging]
+name = "public-api-staging"
+
+routes = [
+    { pattern = "public-api-staging.decflare.com", custom_domain = true, zone_id="f2e8a02f8fdfeff2fb0e9d8f044ca039" }
+]
+

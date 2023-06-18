@@ -1,0 +1,15 @@
+{
+  "name": "private-api-worker",
+  "version": "0.0.1",
+  "module": "dist/worker.mjs",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "pretest": "npm run build",
+    "test": "jest",
+    "build": "rollup -c",
+    "deploy": "wrangler publish",
+    "start": "wrangler dev",
+    "dev": "miniflare dist/worker.mjs --watch --debug"
+  }
+}

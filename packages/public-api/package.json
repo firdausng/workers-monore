@@ -1,0 +1,16 @@
+{
+  "name": "public-api",
+  "version": "1.0.0",
+  "module": "dist/worker.mjs",
+  "scripts": {
+    "mount": "miniflare --mount private-api=../private-api",
+    "build": "rollup -c",
+    "deploy": "wrangler publish",
+    "start": "wrangler dev",
+    "dev": "miniflare dist/worker.mjs --watch --debug "
+  },
+  "dependencies": {
+    "destination-api": "*",
+    "handlers": "*"
+  }
+}
